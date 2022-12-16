@@ -30,25 +30,25 @@ final class ViewController: UIViewController {
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     
-    private var firstPercent = 0
-    private var secondPercent = 0
+    private var firstPercent = 0        // 百分比的值 (1 / 100)
+    private var secondBasisPoint = 0    // 萬分比的值 (1 / 10000)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "WWProgressMaskView"
-        secondMaskView.setting(originalAngle: 90, lineWidth: 30, clockwise: false, lineCap: .round, innerImage: nil, outerImage: nil)
+        secondMaskView.setting(originalAngle: 90, lineWidth: 20, clockwise: false, lineCap: .round, innerImage: nil, outerImage: nil)
     }
     
     @IBAction func firstTestAction(_ sender: UIBarButtonItem) {
         firstLabel.text = "\(firstPercent) %"
-        firstMaskView.progressCircle(percent: firstPercent)
+        firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
         firstPercent += 10
     }
     
     @IBAction func secondTestAction(_ sender: UIBarButtonItem) {
-        secondPercent += 5
-        secondMaskView.progressCircle(percent: secondPercent)
-        secondLabel.text = "\(secondPercent) %"
+        secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
+        secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
+        secondBasisPoint += 125
     }
 }
 ```
