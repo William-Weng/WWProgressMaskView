@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dyl-0f-9pf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dyl-0f-9pf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,6 +39,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="originalAngle">
                                                         <integer key="value" value="0"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="NO"/>
                                                     <userDefinedRuntimeAttribute type="image" keyPath="innerImage" value="inner"/>
                                                     <userDefinedRuntimeAttribute type="image" keyPath="outerImage" value="outer"/>
                                                 </userDefinedRuntimeAttributes>
@@ -94,12 +95,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nvs-zi-2RQ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="TPu-io-xdw">
+                        <barButtonItem key="leftBarButtonItem" systemItem="fastForward" id="TPu-io-xdw">
                             <connections>
                                 <action selector="secondTestAction:" destination="BYZ-38-t0r" id="e7w-Jz-fnA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Gc-wA-rBA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="5Gc-wA-rBA">
                             <connections>
                                 <action selector="firstTestAction:" destination="BYZ-38-t0r" id="hnr-t6-yTq"/>
                             </connections>

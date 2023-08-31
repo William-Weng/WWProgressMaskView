@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "WWProgressMaskView"
-        secondMaskView.setting(originalAngle: 90, lineWidth: 20, clockwise: false, lineCap: .round, innerImage: nil, outerImage: nil)
+        secondMaskView.setting(originalAngle: 90, lineWidth: 20, clockwise: true, lineCap: .round, innerImage: nil, outerImage: nil)
     }
     
     @IBAction func firstTestAction(_ sender: UIBarButtonItem) {
@@ -48,7 +48,7 @@ final class ViewController: UIViewController {
     @IBAction func secondTestAction(_ sender: UIBarButtonItem) {
         secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
         secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
-        secondBasisPoint += 125
+        secondBasisPoint += 1250
     }
 }
 ```

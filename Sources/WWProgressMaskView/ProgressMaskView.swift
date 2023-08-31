@@ -109,11 +109,12 @@ public extension WWProgressMaskView {
     /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
     func progressCircle(progressUnit : ProgressUnit) {
         
-        let endAngle = progressUnit.decimal()._percentValue(from: innerStartAngle, to: innerEndAngle)
+        let percentValueAngle = progressUnit.decimal()._percentValue(from: innerStartAngle, to: innerEndAngle)
+        let endAngle = (!clockwise) ? percentValueAngle : -(percentValueAngle + 360)
         let _startAngle = fixAngle(angle: 0)
-
+        
         var _endAngle = endAngle + originalAngle._CGFloat() + returnZeroAngle
-        if (_endAngle >= returnZeroAngle) { _endAngle += 360 }
+        if (!clockwise && (_endAngle >= returnZeroAngle)) { _endAngle += 360 }
         
         outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle, clockwise: clockwise, lineCap: lineCap)
     }

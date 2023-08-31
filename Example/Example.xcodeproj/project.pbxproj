@@ -12,8 +12,9 @@
 		3DBCD87B26F198EF00522E3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87926F198EF00522E3B /* Main.storyboard */; };
 		3DBCD87D26F198F300522E3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87C26F198F300522E3B /* Assets.xcassets */; };
 		3DBCD88026F198F300522E3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87E26F198F300522E3B /* LaunchScreen.storyboard */; };
-		814D838D294AB8B9009E237B /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814D838C294AB8B9009E237B /* WWProgressMaskView */; };
-		8186E31929498E080053A777 /* WWPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 8186E31829498E080053A777 /* WWPrint */; };
+		8139B2F32AA0790A00C847D5 /* WWPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 8139B2F22AA0790A00C847D5 /* WWPrint */; };
+		8139B2F62AA083E800C847D5 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 8139B2F52AA083E800C847D5 /* WWProgressMaskView */; };
+		81ECB32A2AA04C8C00DBBC5C /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81ECB3292AA04C8C00DBBC5C /* WWProgressMaskView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +32,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				814D838D294AB8B9009E237B /* WWProgressMaskView in Frameworks */,
-				8186E31929498E080053A777 /* WWPrint in Frameworks */,
+				8139B2F32AA0790A00C847D5 /* WWPrint in Frameworks */,
+				81ECB32A2AA04C8C00DBBC5C /* WWProgressMaskView in Frameworks */,
+				8139B2F62AA083E800C847D5 /* WWProgressMaskView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +63,6 @@
 			children = (
 				3DBCD88A26F1995100522E3B /* Setting */,
 				3DBCD88926F1994500522E3B /* Material */,
-				8130038E27D5D17800436128 /* Utility */,
 				3DBCD88826F1993200522E3B /* Storyboard */,
 				3DBCD88726F1992200522E3B /* ViewController */,
 				3DBCD87326F198EF00522E3B /* AppDelegate.swift */,
@@ -102,13 +103,6 @@
 			name = Setting;
 			sourceTree = "<group>";
 		};
-		8130038E27D5D17800436128 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
 		817F185E294971740050F56D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +127,9 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				8186E31829498E080053A777 /* WWPrint */,
-				814D838C294AB8B9009E237B /* WWProgressMaskView */,
+				81ECB3292AA04C8C00DBBC5C /* WWProgressMaskView */,
+				8139B2F22AA0790A00C847D5 /* WWPrint */,
+				8139B2F52AA083E800C847D5 /* WWProgressMaskView */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -165,7 +160,7 @@
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
 				8186E31729498E080053A777 /* XCRemoteSwiftPackageReference "WWPrint" */,
-				814D838B294AB8B9009E237B /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
+				8139B2F42AA083E800C847D5 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -407,7 +402,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		814D838B294AB8B9009E237B /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
+		8139B2F42AA083E800C847D5 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWProgressMaskView";
 			requirement = {
@@ -426,15 +421,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		814D838C294AB8B9009E237B /* WWProgressMaskView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 814D838B294AB8B9009E237B /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
-			productName = WWProgressMaskView;
-		};
-		8186E31829498E080053A777 /* WWPrint */ = {
+		8139B2F22AA0790A00C847D5 /* WWPrint */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8186E31729498E080053A777 /* XCRemoteSwiftPackageReference "WWPrint" */;
 			productName = WWPrint;
+		};
+		8139B2F52AA083E800C847D5 /* WWProgressMaskView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8139B2F42AA083E800C847D5 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
+			productName = WWProgressMaskView;
+		};
+		81ECB3292AA04C8C00DBBC5C /* WWProgressMaskView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WWProgressMaskView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
