@@ -12,9 +12,10 @@
 		3DBCD87B26F198EF00522E3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87926F198EF00522E3B /* Main.storyboard */; };
 		3DBCD87D26F198F300522E3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87C26F198F300522E3B /* Assets.xcassets */; };
 		3DBCD88026F198F300522E3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DBCD87E26F198F300522E3B /* LaunchScreen.storyboard */; };
-		8139B2F32AA0790A00C847D5 /* WWPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 8139B2F22AA0790A00C847D5 /* WWPrint */; };
-		8139B2F62AA083E800C847D5 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 8139B2F52AA083E800C847D5 /* WWProgressMaskView */; };
-		81ECB32A2AA04C8C00DBBC5C /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81ECB3292AA04C8C00DBBC5C /* WWProgressMaskView */; };
+		814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683A2BA2C57D009EFC60 /* WWProgressMaskView */; };
+		814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683D2BA2C5AB009EFC60 /* WWProgressMaskView */; };
+		814B68412BA2C616009EFC60 /* WWPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 814B68402BA2C616009EFC60 /* WWPrint */; };
+		814B68442BA2C62E009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B68432BA2C62E009EFC60 /* WWProgressMaskView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,9 +33,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8139B2F32AA0790A00C847D5 /* WWPrint in Frameworks */,
-				81ECB32A2AA04C8C00DBBC5C /* WWProgressMaskView in Frameworks */,
-				8139B2F62AA083E800C847D5 /* WWProgressMaskView in Frameworks */,
+				814B68442BA2C62E009EFC60 /* WWProgressMaskView in Frameworks */,
+				814B68412BA2C616009EFC60 /* WWPrint in Frameworks */,
+				814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */,
+				814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,9 +129,10 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				81ECB3292AA04C8C00DBBC5C /* WWProgressMaskView */,
-				8139B2F22AA0790A00C847D5 /* WWPrint */,
-				8139B2F52AA083E800C847D5 /* WWProgressMaskView */,
+				814B683A2BA2C57D009EFC60 /* WWProgressMaskView */,
+				814B683D2BA2C5AB009EFC60 /* WWProgressMaskView */,
+				814B68402BA2C616009EFC60 /* WWPrint */,
+				814B68432BA2C62E009EFC60 /* WWProgressMaskView */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -159,8 +162,8 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				8186E31729498E080053A777 /* XCRemoteSwiftPackageReference "WWPrint" */,
-				8139B2F42AA083E800C847D5 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
+				814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */,
+				814B68422BA2C62E009EFC60 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -340,7 +343,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4Q5CYDAG3B;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -350,6 +353,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -363,7 +367,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4Q5CYDAG3B;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -373,6 +377,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -402,37 +407,41 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8139B2F42AA083E800C847D5 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
+		814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/William-Weng/WWPrint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
+		814B68422BA2C62E009EFC60 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWProgressMaskView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		8186E31729498E080053A777 /* XCRemoteSwiftPackageReference "WWPrint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/William-Weng/WWPrint.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8139B2F22AA0790A00C847D5 /* WWPrint */ = {
+		814B683A2BA2C57D009EFC60 /* WWProgressMaskView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8186E31729498E080053A777 /* XCRemoteSwiftPackageReference "WWPrint" */;
-			productName = WWPrint;
-		};
-		8139B2F52AA083E800C847D5 /* WWProgressMaskView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8139B2F42AA083E800C847D5 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
 			productName = WWProgressMaskView;
 		};
-		81ECB3292AA04C8C00DBBC5C /* WWProgressMaskView */ = {
+		814B683D2BA2C5AB009EFC60 /* WWProgressMaskView */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = WWProgressMaskView;
+		};
+		814B68402BA2C616009EFC60 /* WWPrint */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */;
+			productName = WWPrint;
+		};
+		814B68432BA2C62E009EFC60 /* WWProgressMaskView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 814B68422BA2C62E009EFC60 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
 			productName = WWProgressMaskView;
 		};
 /* End XCSwiftPackageProductDependency section */

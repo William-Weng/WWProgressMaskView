@@ -90,7 +90,7 @@ public extension WWProgressMaskView {
         self.lineCap = lineCap
         self.originalAngle = originalAngle
         
-        self.draw(self.frame)
+        self.setNeedsDisplay()
     }
     
     /// 畫進度條 (以角度為準)
@@ -107,7 +107,7 @@ public extension WWProgressMaskView {
     
     /// 畫進度條
     /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
-    func progressCircle(progressUnit : ProgressUnit) {
+    func progressCircle(progressUnit: ProgressUnit) {
         
         let percentValueAngle = progressUnit.decimal()._percentValue(from: innerStartAngle, to: innerEndAngle)
         let endAngle = (!clockwise) ? percentValueAngle : -(percentValueAngle + 360)
