@@ -131,7 +131,7 @@ private extension WWProgressMaskView {
     func initViewFromXib() {
         
         let bundle = Bundle.module
-        let name = String(describing: Self.self)
+        let name = String(describing: WWProgressMaskView.self)
         
         bundle.loadNibNamed(name, owner: self, options: nil)
         contentView.frame = bounds
