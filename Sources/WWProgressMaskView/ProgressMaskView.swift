@@ -32,6 +32,7 @@ open class WWProgressMaskView: UIView {
     
     @IBInspectable var clockwise: Bool = false
     @IBInspectable var lineWidth: Int = 10
+    @IBInspectable var lineGap: CGFloat = 0.0
     @IBInspectable var originalAngle: Int = 0
     @IBInspectable var innerImage: UIImage = UIImage()
     @IBInspectable var outerImage: UIImage = UIImage()
@@ -81,13 +82,16 @@ public extension WWProgressMaskView {
     ///   - innerImage: 內圈軌道的背景圖 (有預設圖片)
     ///   - outerImage: 外圈進度的背景圖 (有預設圖片)
     ///   - lineCap: [線條頭尾的長相](https://developer.apple.com/documentation/quartzcore/cashapelayerlinecap)
-    func setting(originalAngle: Int = 0, lineWidth: Int = 10, clockwise: Bool = false, lineCap: CAShapeLayerLineCap = .butt, innerImage: UIImage? = nil, outerImage: UIImage? = nil) {
+    ///   - lineGap: 內環與外環的距離
+    func setting(originalAngle: Int = 0, lineWidth: Int = 10, clockwise: Bool = false, lineCap: CAShapeLayerLineCap = .butt, lineGap: CGFloat, innerImage: UIImage? = nil, outerImage: UIImage? = nil) {
         
         self.lineWidth = lineWidth
         self.clockwise = clockwise
         self.innerImage = innerImage ?? self.innerImage
         self.outerImage = outerImage ?? self.outerImage
         self.lineCap = lineCap
+        self.lineGap = lineGap
+        
         self.originalAngle = originalAngle
         
         self.setNeedsDisplay()
@@ -131,7 +135,7 @@ private extension WWProgressMaskView {
         
         bundle.loadNibNamed(name, owner: self, options: nil)
         contentView.frame = bounds
-
+        
         addSubview(contentView)
     }
     
@@ -187,7 +191,7 @@ private extension WWProgressMaskView {
     func outerCircleSetting(lineWidth: CGFloat, from startAngle: CGFloat, to endAngle: CGFloat, clockwise: Bool, lineCap: CAShapeLayerLineCap = .butt) {
         
         let path = outerImageView._circlePath(from: startAngle._radian(), to: endAngle._radian(), lineWidth: lineWidth, clockwise: clockwise)
-        let layer = CAShapeLayer()._path(path)._lineWidth(lineWidth)._fillColor(nil)._strokeColor(.gray)._lineCap(lineCap)
+        let layer = CAShapeLayer()._path(path)._lineWidth(lineWidth - lineGap)._fillColor(nil)._strokeColor(.gray)._lineCap(lineCap)
         outerImageView.layer.mask = layer
     }
     

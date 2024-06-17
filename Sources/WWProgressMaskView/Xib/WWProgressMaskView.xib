@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,14 +30,14 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Dd3-6Q-RQI" secondAttribute="trailing" id="1AU-VK-dEo"/>
-                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5Po-R0-bD4"/>
-                <constraint firstAttribute="bottom" secondItem="Dd3-6Q-RQI" secondAttribute="bottom" id="BHi-Z2-EAy"/>
-                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Hfy-eV-IOX"/>
-                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Liy-sb-h6Y"/>
-                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="WcW-Hz-dzn"/>
-                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="g42-o5-364"/>
-                <constraint firstAttribute="bottom" secondItem="OrA-Q7-Uuc" secondAttribute="bottom" id="iMh-xI-7j9"/>
+                <constraint firstAttribute="bottom" secondItem="Dd3-6Q-RQI" secondAttribute="bottom" id="Caq-gR-9ih"/>
+                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="width" secondItem="Dd3-6Q-RQI" secondAttribute="width" id="Psy-jm-e5U"/>
+                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="TMr-uj-ncn"/>
+                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="X8l-lb-iGQ"/>
+                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bxZ-Gr-RrA"/>
+                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="mxk-ZD-edV"/>
+                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sF1-ZH-ZE3"/>
+                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="height" secondItem="Dd3-6Q-RQI" secondAttribute="height" id="yzc-pU-Skl"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="306.87022900763355" y="-45.070422535211272"/>

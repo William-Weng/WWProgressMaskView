@@ -20,7 +20,7 @@ dependencies: [
 ### Function - 可用函式
 |函式|功能|
 |-|-|
-|setting(originalAngle:lineWidth:clockwise:lineCap:innerImage:outerImage:)|設定一些初始值 => 會重畫|
+|setting(originalAngle:lineWidth:clockwise:lineCap:lineGap:innerImage:outerImage:)|設定一些初始值 => 會重畫|
 |progressCircle(from:to:)|畫進度條 (以角度為準)|
 |progressCircle(progressUnit:)|畫進度條|
 
@@ -43,7 +43,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "WWProgressMaskView"
-        secondMaskView.setting(originalAngle: 90, lineWidth: 20, clockwise: true, lineCap: .round, innerImage: nil, outerImage: nil)
+        secondMaskView.setting(originalAngle: 90, lineWidth: 30, clockwise: true, lineCap: .round, lineGap: 10, innerImage: nil, outerImage: nil)
     }
     
     @IBAction func firstTestAction(_ sender: UIBarButtonItem) {
