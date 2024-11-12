@@ -16,7 +16,8 @@
 		814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683A2BA2C57D009EFC60 /* WWProgressMaskView */; };
 		814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683D2BA2C5AB009EFC60 /* WWProgressMaskView */; };
 		814B68412BA2C616009EFC60 /* WWPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 814B68402BA2C616009EFC60 /* WWPrint */; };
-		81EA5D0E2C20093000736B21 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81EA5D0D2C20093000736B21 /* WWProgressMaskView */; };
+		81A998DA2CE3218C00589009 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81A998D92CE3218C00589009 /* WWProgressMaskView */; };
+		81B3BB3E2CE33EBD0078F876 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81B3BB3D2CE33EBD0078F876 /* WWProgressMaskView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,8 @@
 			files = (
 				813EF6522C2006BB00463E19 /* WWProgressMaskView in Frameworks */,
 				814B68412BA2C616009EFC60 /* WWPrint in Frameworks */,
-				81EA5D0E2C20093000736B21 /* WWProgressMaskView in Frameworks */,
+				81B3BB3E2CE33EBD0078F876 /* WWProgressMaskView in Frameworks */,
+				81A998DA2CE3218C00589009 /* WWProgressMaskView in Frameworks */,
 				814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */,
 				814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */,
 			);
@@ -135,7 +137,8 @@
 				814B683D2BA2C5AB009EFC60 /* WWProgressMaskView */,
 				814B68402BA2C616009EFC60 /* WWPrint */,
 				813EF6512C2006BB00463E19 /* WWProgressMaskView */,
-				81EA5D0D2C20093000736B21 /* WWProgressMaskView */,
+				81A998D92CE3218C00589009 /* WWProgressMaskView */,
+				81B3BB3D2CE33EBD0078F876 /* WWProgressMaskView */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -147,8 +150,9 @@
 		3DBCD86826F198EF00522E3B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					3DBCD86F26F198EF00522E3B = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -166,7 +170,7 @@
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
 				814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */,
-				81EA5D0C2C20093000736B21 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
+				81B3BB3C2CE33EBD0078F876 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -259,6 +263,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -273,7 +278,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -320,6 +325,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -328,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -418,12 +424,12 @@
 				minimumVersion = 1.3.1;
 			};
 		};
-		81EA5D0C2C20093000736B21 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
+		81B3BB3C2CE33EBD0078F876 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/William-Weng/WWProgressMaskView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.0;
+				minimumVersion = 1.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -446,9 +452,13 @@
 			package = 814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */;
 			productName = WWPrint;
 		};
-		81EA5D0D2C20093000736B21 /* WWProgressMaskView */ = {
+		81A998D92CE3218C00589009 /* WWProgressMaskView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81EA5D0C2C20093000736B21 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
+			productName = WWProgressMaskView;
+		};
+		81B3BB3D2CE33EBD0078F876 /* WWProgressMaskView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81B3BB3C2CE33EBD0078F876 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
 			productName = WWProgressMaskView;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -98,14 +98,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nvs-zi-2RQ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="fastForward" id="TPu-io-xdw">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="fastForward" id="TPu-io-xdw">
+                                <connections>
+                                    <action selector="secondTestAction:" destination="BYZ-38-t0r" id="e7w-Jz-fnA"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="5Gc-wA-rBA">
+                                <connections>
+                                    <action selector="firstTestAction:" destination="BYZ-38-t0r" id="hnr-t6-yTq"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="Cl2-Pr-bUU">
                             <connections>
-                                <action selector="secondTestAction:" destination="BYZ-38-t0r" id="e7w-Jz-fnA"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="5Gc-wA-rBA">
-                            <connections>
-                                <action selector="firstTestAction:" destination="BYZ-38-t0r" id="hnr-t6-yTq"/>
+                                <action selector="resetAction:" destination="BYZ-38-t0r" id="0pb-eT-591"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

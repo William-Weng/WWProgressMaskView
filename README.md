@@ -6,12 +6,12 @@
 - The progress ring function of the custom background image uses the principle of picture shielding to make the color of the progress ring more diverse...
 - 自訂背景圖的進度環功能，利用圖片遮罩的原理，讓進度環的色彩更多樣化…
 
-![](./Example.gif)
+![](./Example.webp)
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWProgressMaskView.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/William-Weng/WWProgressMaskView.git", .upToNextMajor(from: "1.2.2"))
 ]
 ```
 
@@ -42,20 +42,43 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "WWProgressMaskView"
-        secondMaskView.setting(originalAngle: 90, lineWidth: 30, clockwise: true, lineCap: .round, lineGap: 10, innerImage: nil, outerImage: nil)
+        initSetting()
     }
     
     @IBAction func firstTestAction(_ sender: UIBarButtonItem) {
+        firstPercent += 10
         firstLabel.text = "\(firstPercent) %"
         firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
-        firstPercent += 10
     }
     
     @IBAction func secondTestAction(_ sender: UIBarButtonItem) {
+        secondBasisPoint += 1250
         secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
         secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
-        secondBasisPoint += 1250
+    }
+    
+    @IBAction func resetAction(_ sender: UIBarButtonItem) {
+        resetSetting()
+    }
+}
+
+private extension ViewController {
+    
+    func initSetting() {
+        self.title = "WWProgressMaskView"
+        secondMaskView.setting(originalAngle: 90, lineWidth: 30, clockwise: false, lineCap: .round, lineGap: 10, innerImage: nil, outerImage: nil)
+    }
+        
+    func resetSetting() {
+        
+        firstPercent = 0
+        secondBasisPoint = 0
+        
+        secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
+        firstLabel.text = "\(firstPercent) %"
+
+        firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
+        secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
     }
 }
 ```

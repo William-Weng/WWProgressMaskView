@@ -4,7 +4,7 @@
 //
 //  Created by William.Weng on 2022/12/14.
 //  ~/Library/Caches/org.swift.swiftpm/
-//  file:///Users/ios/Desktop/WWProgressMaskView
+//
 
 import UIKit
 import WWPrint
@@ -22,19 +22,42 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "WWProgressMaskView"
-        secondMaskView.setting(originalAngle: 90, lineWidth: 30, clockwise: true, lineCap: .round, lineGap: 10, innerImage: nil, outerImage: nil)
+        initSetting()
     }
     
     @IBAction func firstTestAction(_ sender: UIBarButtonItem) {
+        firstPercent += 10
         firstLabel.text = "\(firstPercent) %"
         firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
-        firstPercent += 10
     }
     
     @IBAction func secondTestAction(_ sender: UIBarButtonItem) {
+        secondBasisPoint += 1250
         secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
         secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
-        secondBasisPoint += 1250
+    }
+    
+    @IBAction func resetAction(_ sender: UIBarButtonItem) {
+        resetSetting()
+    }
+}
+
+private extension ViewController {
+    
+    func initSetting() {
+        self.title = "WWProgressMaskView"
+        secondMaskView.setting(originalAngle: 90, lineWidth: 30, clockwise: false, lineCap: .round, lineGap: 10, innerImage: nil, outerImage: nil)
+    }
+        
+    func resetSetting() {
+        
+        firstPercent = 0
+        secondBasisPoint = 0
+        
+        secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
+        firstLabel.text = "\(firstPercent) %"
+
+        firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
+        secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
     }
 }

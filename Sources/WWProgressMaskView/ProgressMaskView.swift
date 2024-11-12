@@ -8,24 +8,6 @@
 
 import UIKit
 
-/// 進度單位 => 1% / 1‰ / 1‱ (整數比較不會有誤差值)
-public enum ProgressUnit {
-    
-    case percent(_ number: Int)     // 百分之一 (1 / 100 -> 1%)
-    case permil(_ number: Int)      // 千分之一 (1 / 1000 -> 1‰)
-    case basisPoint(_ number: Int)  // 萬分之一 (1 / 10000 -> 1‱)
-    
-    /// 換算數值成小數 => 0% ~ 100%
-    /// - Returns: CGFloat
-    func decimal() -> CGFloat {
-        switch self {
-        case .percent(let number): return number._CGFloat() * 0.01
-        case .permil(let number): return number._CGFloat() * 0.001
-        case .basisPoint(let number): return number._CGFloat() * 0.0001
-        }
-    }
-}
-
 // MARK: - 動態的進度條
 @IBDesignable
 open class WWProgressMaskView: UIView {
@@ -41,9 +23,9 @@ open class WWProgressMaskView: UIView {
     @IBOutlet weak var innerImageView: UIImageView!
     @IBOutlet weak var outerImageView: UIImageView!
     
-    private let returnZeroAngle: CGFloat = -90
-    private let innerStartAngle: CGFloat = 0
-    private let innerEndAngle: CGFloat = 360
+    private let returnZeroAngle: Int = -90
+    private let innerStartAngle: Int = 0
+    private let innerEndAngle: Int = 360
     
     private var lineCap: CAShapeLayerLineCap = .butt
     
@@ -92,8 +74,7 @@ public extension WWProgressMaskView {
         self.lineCap = lineCap
         self.lineGap = lineGap
         
-        self.originalAngle = originalAngle
-        
+        self.originalAngle = (originalAngle < 0) ? (originalAngle % 360) + innerEndAngle : originalAngle % 360
         self.setNeedsDisplay()
     }
     
@@ -113,12 +94,12 @@ public extension WWProgressMaskView {
     /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
     func progressCircle(progressUnit: ProgressUnit) {
         
-        let percentValueAngle = progressUnit.decimal()._percentValue(from: innerStartAngle, to: innerEndAngle)
+        let percentValueAngle = progressUnit.decimal()._percentValue(from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat())
         let endAngle = (!clockwise) ? percentValueAngle : -(percentValueAngle + 360)
         let _startAngle = fixAngle(angle: 0)
         
-        var _endAngle = endAngle + originalAngle._CGFloat() + returnZeroAngle
-        if (!clockwise && (_endAngle >= returnZeroAngle)) { _endAngle += 360 }
+        var _endAngle = endAngle + originalAngle._CGFloat() + returnZeroAngle._CGFloat()
+        if (!clockwise && (_endAngle >= returnZeroAngle._CGFloat())) { _endAngle += 360 }
         
         outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle, clockwise: clockwise, lineCap: lineCap)
     }
@@ -163,7 +144,7 @@ private extension WWProgressMaskView {
         innerImageView.image = innerImage
         outerImageView.image = outerImage
         
-        innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle, to: innerEndAngle, clockwise: clockwise, lineCap: lineCap)
+        innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
         outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: 0, to: 0, clockwise: clockwise, lineCap: lineCap)
     }
     
@@ -197,5 +178,5 @@ private extension WWProgressMaskView {
     
     /// 角度修正 / 歸零
     /// - Parameter angle: Int
-    func fixAngle(angle: Int) -> Int { return angle + originalAngle + returnZeroAngle._int() }
+    func fixAngle(angle: Int) -> Int { return angle + originalAngle + returnZeroAngle }
 }
