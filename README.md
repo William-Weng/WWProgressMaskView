@@ -20,7 +20,7 @@ dependencies: [
 ### Function - 可用函式
 |函式|功能|
 |-|-|
-|setting(originalAngle:lineWidth:clockwise:lineCap:lineGap:innerImage:outerImage:)|設定一些初始值 => 會重畫|
+|setting(originalAngle:lineWidth:clockwise:lineCap:lineGap:innerImage:outerImage:innerStartAngle:innerEndAngle:)|設定一些初始值 => 會重畫|
 |progressCircle(from:to:)|畫進度條 (以角度為準)|
 |progressCircle(progressUnit:)|畫進度條|
 
