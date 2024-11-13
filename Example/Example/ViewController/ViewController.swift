@@ -46,7 +46,7 @@ private extension ViewController {
     
     func initSetting() {
         self.title = "WWProgressMaskView"
-        secondMaskView.setting(originalAngle: 90, lineWidth: 30, clockwise: false, lineCap: .round, lineGap: 10, innerImage: nil, outerImage: nil)
+        secondMaskView.setting(originalAngle: 90, lineWidth: 20, clockwise: false, lineCap: .round, lineGap: -18, innerImage: nil, outerImage: nil)
     }
         
     func resetSetting() {

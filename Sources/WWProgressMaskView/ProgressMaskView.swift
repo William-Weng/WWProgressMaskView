@@ -67,10 +67,15 @@ public extension WWProgressMaskView {
     ///   - lineGap: 內環與外環的距離
     func setting(originalAngle: Int = 0, lineWidth: Int = 10, clockwise: Bool = false, lineCap: CAShapeLayerLineCap = .butt, lineGap: CGFloat, innerImage: UIImage? = nil, outerImage: UIImage? = nil) {
         
+        if (lineGap < 0) { contentView.bringSubviewToFront(innerImageView) }
+        
+        let newInnerImage = (lineGap < 0) ? (outerImage ?? self.outerImage) : (innerImage ?? self.innerImage)
+        let newOuterImage = (lineGap < 0) ? (innerImage ?? self.innerImage) : (outerImage ?? self.outerImage)
+        
         self.lineWidth = lineWidth
         self.clockwise = clockwise
-        self.innerImage = innerImage ?? self.innerImage
-        self.outerImage = outerImage ?? self.outerImage
+        self.innerImage = newInnerImage
+        self.outerImage = newOuterImage
         self.lineCap = lineCap
         self.lineGap = lineGap
         
@@ -87,7 +92,11 @@ public extension WWProgressMaskView {
         let _startAngle = fixAngle(angle: startAngle)
         let _endAngle = fixAngle(angle: endAngle)
         
-        outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+        if (lineGap < 0) {
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+        } else {
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+        }
     }
     
     /// 畫進度條
@@ -101,7 +110,11 @@ public extension WWProgressMaskView {
         var _endAngle = endAngle + originalAngle._CGFloat() + returnZeroAngle._CGFloat()
         if (!clockwise && (_endAngle >= returnZeroAngle._CGFloat())) { _endAngle += 360 }
         
-        outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle, clockwise: clockwise, lineCap: lineCap)
+        if (lineGap < 0) {
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle, clockwise: clockwise, lineCap: lineCap)
+        } else {
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle, clockwise: clockwise, lineCap: lineCap)
+        }
     }
 }
 
@@ -129,7 +142,7 @@ private extension WWProgressMaskView {
         else {
             return
         }
-
+        
         innerImage = defaultInnerImage
         outerImage = defaultOuterImage
     }
@@ -144,8 +157,13 @@ private extension WWProgressMaskView {
         innerImageView.image = innerImage
         outerImageView.image = outerImage
         
-        innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
-        outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: 0, to: 0, clockwise: clockwise, lineCap: lineCap)
+        if (lineGap < 0) {
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: 0, to: 0, clockwise: clockwise, lineCap: lineCap)
+        } else {
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: 0, to: 0, clockwise: clockwise, lineCap: lineCap)
+        }
     }
     
     /// [設定內圈軌道的Layer層](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/利用-uiview-的-mask-設計特別形狀的圖片-4e22cd7c3fbe)
@@ -172,7 +190,7 @@ private extension WWProgressMaskView {
     func outerCircleSetting(lineWidth: CGFloat, from startAngle: CGFloat, to endAngle: CGFloat, clockwise: Bool, lineCap: CAShapeLayerLineCap = .butt) {
         
         let path = outerImageView._circlePath(from: startAngle._radian(), to: endAngle._radian(), lineWidth: lineWidth, clockwise: clockwise)
-        let layer = CAShapeLayer()._path(path)._lineWidth(lineWidth - lineGap)._fillColor(nil)._strokeColor(.gray)._lineCap(lineCap)
+        let layer = CAShapeLayer()._path(path)._lineWidth(lineWidth - abs(lineGap))._fillColor(nil)._strokeColor(.gray)._lineCap(lineCap)
         outerImageView.layer.mask = layer
     }
     
