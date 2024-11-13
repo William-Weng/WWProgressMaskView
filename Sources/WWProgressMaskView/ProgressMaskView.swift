@@ -24,8 +24,9 @@ open class WWProgressMaskView: UIView {
     @IBOutlet weak var outerImageView: UIImageView!
     
     private let returnZeroAngle: Int = -90
-    private let innerStartAngle: Int = 0
-    private let innerEndAngle: Int = 360
+    
+    private var innerStartAngle: Int = 0
+    private var innerEndAngle: Int = 360
     
     private var lineCap: CAShapeLayerLineCap = .butt
     
@@ -65,7 +66,9 @@ public extension WWProgressMaskView {
     ///   - outerImage: 外圈進度的背景圖 (有預設圖片)
     ///   - lineCap: [線條頭尾的長相](https://developer.apple.com/documentation/quartzcore/cashapelayerlinecap)
     ///   - lineGap: 內環與外環的距離
-    func setting(originalAngle: Int = 0, lineWidth: Int = 10, clockwise: Bool = false, lineCap: CAShapeLayerLineCap = .butt, lineGap: CGFloat, innerImage: UIImage? = nil, outerImage: UIImage? = nil) {
+    ///   - innerStartAngle: 開始的角度
+    ///   - innerEndAngle: 結束的角度
+    func setting(originalAngle: Int = 0, lineWidth: Int = 10, clockwise: Bool = false, lineCap: CAShapeLayerLineCap = .butt, lineGap: CGFloat, innerImage: UIImage? = nil, outerImage: UIImage? = nil, innerStartAngle: Int = 0, innerEndAngle: Int = 360) {
         
         if (lineGap < 0) { contentView.bringSubviewToFront(innerImageView) }
         
@@ -78,6 +81,8 @@ public extension WWProgressMaskView {
         self.outerImage = newOuterImage
         self.lineCap = lineCap
         self.lineGap = lineGap
+        self.innerStartAngle = innerStartAngle + returnZeroAngle
+        self.innerEndAngle = innerEndAngle + returnZeroAngle
         
         self.originalAngle = (originalAngle < 0) ? (originalAngle % 360) + innerEndAngle : originalAngle % 360
         self.setNeedsDisplay()
@@ -87,33 +92,36 @@ public extension WWProgressMaskView {
     /// - Parameters:
     ///   - startAngle: 啟始角度 (-180 ~ 180)
     ///   - endAngle: 結束角度 (180 ~ -180)
-    func progressCircle(from startAngle: Int, to endAngle: Int) {
+    func progressCircle(from startAngle: CGFloat, to endAngle: CGFloat) {
         
         let _startAngle = fixAngle(angle: startAngle)
         let _endAngle = fixAngle(angle: endAngle)
         
         if (lineGap < 0) {
-            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
         } else {
-            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
         }
     }
-    
-    /// 畫進度條
+        
+    /// 畫進度條 (扇形的角度要做修正，因為未滿360度)
     /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
     func progressCircle(progressUnit: ProgressUnit) {
         
-        let percentValueAngle = progressUnit.decimal()._percentValue(from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat())
+        let percentValueAngle = parsePercentValueAngle(progressUnit: progressUnit)
         let endAngle = (!clockwise) ? percentValueAngle : -(percentValueAngle + 360)
+
         let _startAngle = fixAngle(angle: 0)
+        var _endAngle = fixAngle(angle: endAngle)
         
-        var _endAngle = endAngle + originalAngle._CGFloat() + returnZeroAngle._CGFloat()
         if (!clockwise && (_endAngle >= returnZeroAngle._CGFloat())) { _endAngle += 360 }
         
+        let fixCircularSectorAngle = (innerEndAngle - innerStartAngle - 360) % 360 / 2
+        
         if (lineGap < 0) {
-            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle, clockwise: clockwise, lineCap: lineCap)
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle - fixCircularSectorAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
         } else {
-            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle._CGFloat(), to: _endAngle, clockwise: clockwise, lineCap: lineCap)
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle - fixCircularSectorAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
         }
     }
 }
@@ -159,10 +167,10 @@ private extension WWProgressMaskView {
         
         if (lineGap < 0) {
             outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
-            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: 0, to: 0, clockwise: clockwise, lineCap: lineCap)
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerStartAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
         } else {
             innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
-            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: 0, to: 0, clockwise: clockwise, lineCap: lineCap)
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerStartAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
         }
     }
     
@@ -195,6 +203,18 @@ private extension WWProgressMaskView {
     }
     
     /// 角度修正 / 歸零
-    /// - Parameter angle: Int
-    func fixAngle(angle: Int) -> Int { return angle + originalAngle + returnZeroAngle }
+    /// - Parameter angle: CGFloat
+    func fixAngle(angle: CGFloat) -> CGFloat { return angle + originalAngle._CGFloat() + returnZeroAngle._CGFloat() }
+    
+    /// 百分比 (0% ~ 100%) => 角度
+    /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
+    /// - Returns: CGFloat
+    func parsePercentValueAngle(progressUnit: ProgressUnit) -> CGFloat {
+        
+        var percent = progressUnit.decimal()
+        if (percent < 0.0) { percent = 0.0 }
+        if (percent > 1.0) { percent = 1.0 }
+        
+        return percent._percentValue(from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat())
+    }
 }

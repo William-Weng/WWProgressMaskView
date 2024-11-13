@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,8 +16,8 @@
 		814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683A2BA2C57D009EFC60 /* WWProgressMaskView */; };
 		814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683D2BA2C5AB009EFC60 /* WWProgressMaskView */; };
 		814B68412BA2C616009EFC60 /* WWPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 814B68402BA2C616009EFC60 /* WWPrint */; };
+		8171945E2CE483DE0078385F /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 8171945D2CE483DE0078385F /* WWProgressMaskView */; };
 		81A998DA2CE3218C00589009 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81A998D92CE3218C00589009 /* WWProgressMaskView */; };
-		81B3BB3E2CE33EBD0078F876 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81B3BB3D2CE33EBD0078F876 /* WWProgressMaskView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +37,7 @@
 			files = (
 				813EF6522C2006BB00463E19 /* WWProgressMaskView in Frameworks */,
 				814B68412BA2C616009EFC60 /* WWPrint in Frameworks */,
-				81B3BB3E2CE33EBD0078F876 /* WWProgressMaskView in Frameworks */,
+				8171945E2CE483DE0078385F /* WWProgressMaskView in Frameworks */,
 				81A998DA2CE3218C00589009 /* WWProgressMaskView in Frameworks */,
 				814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */,
 				814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */,
@@ -138,7 +138,7 @@
 				814B68402BA2C616009EFC60 /* WWPrint */,
 				813EF6512C2006BB00463E19 /* WWProgressMaskView */,
 				81A998D92CE3218C00589009 /* WWProgressMaskView */,
-				81B3BB3D2CE33EBD0078F876 /* WWProgressMaskView */,
+				8171945D2CE483DE0078385F /* WWProgressMaskView */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -170,7 +170,7 @@
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
 				814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */,
-				81B3BB3C2CE33EBD0078F876 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
+				8171945C2CE483DE0078385F /* XCLocalSwiftPackageReference ".." */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -415,6 +415,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		8171945C2CE483DE0078385F /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -422,14 +429,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.3.1;
-			};
-		};
-		81B3BB3C2CE33EBD0078F876 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/William-Weng/WWProgressMaskView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -452,13 +451,12 @@
 			package = 814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */;
 			productName = WWPrint;
 		};
-		81A998D92CE3218C00589009 /* WWProgressMaskView */ = {
+		8171945D2CE483DE0078385F /* WWProgressMaskView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WWProgressMaskView;
 		};
-		81B3BB3D2CE33EBD0078F876 /* WWProgressMaskView */ = {
+		81A998D92CE3218C00589009 /* WWProgressMaskView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 81B3BB3C2CE33EBD0078F876 /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
 			productName = WWProgressMaskView;
 		};
 /* End XCSwiftPackageProductDependency section */
