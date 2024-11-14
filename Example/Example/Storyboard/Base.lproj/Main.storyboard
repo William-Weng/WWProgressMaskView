@@ -30,8 +30,11 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeI-Gd-EXF" customClass="MyProgressMaskView" customModule="Example" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="270.5"/>
+                                                <rect key="frame" x="52" y="0.0" width="270.5" height="270.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="DeI-Gd-EXF" secondAttribute="height" id="hRh-s3-rgZ"/>
+                                                </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                                         <integer key="value" value="20"/>
@@ -45,17 +48,18 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="lineGap">
                                                         <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hiddenMarkerView" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="markerImage" value="dollar"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="xyH-ad-i0f" firstAttribute="centerX" secondItem="2aH-hT-ifT" secondAttribute="centerX" id="BPa-fZ-ZDi"/>
-                                            <constraint firstAttribute="bottom" secondItem="DeI-Gd-EXF" secondAttribute="bottom" id="BaN-nt-83a"/>
-                                            <constraint firstItem="DeI-Gd-EXF" firstAttribute="top" secondItem="2aH-hT-ifT" secondAttribute="top" id="RPW-Ew-mir"/>
-                                            <constraint firstItem="DeI-Gd-EXF" firstAttribute="leading" secondItem="2aH-hT-ifT" secondAttribute="leading" id="RlV-6y-kM3"/>
+                                            <constraint firstItem="DeI-Gd-EXF" firstAttribute="top" secondItem="2aH-hT-ifT" secondAttribute="top" id="DGY-uR-Lvz"/>
+                                            <constraint firstItem="DeI-Gd-EXF" firstAttribute="centerX" secondItem="2aH-hT-ifT" secondAttribute="centerX" id="H9P-KF-aKu"/>
                                             <constraint firstItem="xyH-ad-i0f" firstAttribute="centerY" secondItem="2aH-hT-ifT" secondAttribute="centerY" id="ZAl-fo-tRD"/>
-                                            <constraint firstAttribute="trailing" secondItem="DeI-Gd-EXF" secondAttribute="trailing" id="x4X-oo-6yg"/>
+                                            <constraint firstItem="DeI-Gd-EXF" firstAttribute="centerY" secondItem="2aH-hT-ifT" secondAttribute="centerY" id="l5O-pp-Amu"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOr-6K-qgb">
@@ -68,18 +72,24 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YyX-Kp-21k" customClass="MyProgressMaskView" customModule="Example" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="270.5"/>
+                                                <rect key="frame" x="52" y="0.0" width="270.5" height="270.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="YyX-Kp-21k" secondAttribute="height" id="24Q-mF-eMT"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hiddenMarkerView" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="YyX-Kp-21k" secondAttribute="trailing" id="5D2-SI-Zks"/>
                                             <constraint firstItem="NLg-jX-L0L" firstAttribute="centerX" secondItem="UOr-6K-qgb" secondAttribute="centerX" id="8Vh-m3-vqC"/>
-                                            <constraint firstItem="YyX-Kp-21k" firstAttribute="top" secondItem="UOr-6K-qgb" secondAttribute="top" id="OHK-0Q-1aX"/>
-                                            <constraint firstItem="YyX-Kp-21k" firstAttribute="leading" secondItem="UOr-6K-qgb" secondAttribute="leading" id="d3q-8D-INy"/>
+                                            <constraint firstItem="YyX-Kp-21k" firstAttribute="centerX" secondItem="UOr-6K-qgb" secondAttribute="centerX" id="Aa7-TD-eTe"/>
+                                            <constraint firstItem="YyX-Kp-21k" firstAttribute="top" secondItem="UOr-6K-qgb" secondAttribute="top" id="RJV-Yc-vaB"/>
                                             <constraint firstItem="NLg-jX-L0L" firstAttribute="centerY" secondItem="UOr-6K-qgb" secondAttribute="centerY" id="nGo-oP-qWa"/>
-                                            <constraint firstAttribute="bottom" secondItem="YyX-Kp-21k" secondAttribute="bottom" id="vGa-pH-CDR"/>
+                                            <constraint firstItem="YyX-Kp-21k" firstAttribute="centerY" secondItem="UOr-6K-qgb" secondAttribute="centerY" id="oHY-Si-76S"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -147,6 +157,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dollar" width="42.666667938232422" height="42.666667938232422"/>
         <image name="inner" width="333.33334350585938" height="333.33334350585938"/>
         <image name="outer" width="333.33334350585938" height="333.33334350585938"/>
         <systemColor name="systemBackgroundColor">

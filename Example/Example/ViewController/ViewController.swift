@@ -20,8 +20,8 @@ final class ViewController: UIViewController {
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     
-    private var firstPercent = 0        // 百分比的值 (1 / 100)
-    private var secondBasisPoint = 0    // 萬分比的值 (1 / 10000)
+    private var firstPercent = 0
+    private var secondBasisPoint = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +29,15 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func firstTestAction(_ sender: UIBarButtonItem) {
-        firstPercent += 10
         firstLabel.text = "\(firstPercent) %"
         firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
+        firstPercent += 10
     }
     
     @IBAction func secondTestAction(_ sender: UIBarButtonItem) {
-        secondBasisPoint += 1250
         secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
         secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
+        secondBasisPoint += 1250
     }
     
     @IBAction func resetAction(_ sender: UIBarButtonItem) {
@@ -51,7 +51,8 @@ private extension ViewController {
         self.title = "WWProgressMaskView"
         // secondMaskView.setting(originalAngle: 225, lineWidth: 20, clockwise: false, lineCap: .round, lineGap: -18, innerStartAngle: 225, innerEndAngle: 495)
         secondMaskView.setting(originalAngle: 135, lineWidth: 20, clockwise: true, hiddenMarkerView: false, lineCap: .round, lineGap: -18, markerImage: UIImage(named: "dollar"), innerStartAngle: 135, innerEndAngle: -135)
-
+    }
+        
     func resetSetting() {
         
         firstPercent = 0
