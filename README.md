@@ -20,7 +20,7 @@ dependencies: [
 ### Function - 可用函式
 |函式|功能|
 |-|-|
-|setting(originalAngle:lineWidth:clockwise:lineCap:lineGap:innerImage:outerImage:innerStartAngle:innerEndAngle:)|設定一些初始值 => 會重畫|
+|setting(originalAngle:lineWidth:clockwise:hiddenMarkerView:lineCap:lineGap:innerImage:outerImage:markerImage:innerStartAngle:innerEndAngle:)|設定一些初始值 => 會重畫|
 |progressCircle(from:to:)|畫進度條 (以角度為準)|
 |progressCircle(progressUnit:)|畫進度條|
 
@@ -67,7 +67,7 @@ private extension ViewController {
     func initSetting() {
         self.title = "WWProgressMaskView"
         // secondMaskView.setting(originalAngle: 225, lineWidth: 20, clockwise: false, lineCap: .round, lineGap: -18, innerStartAngle: 225, innerEndAngle: 495)
-        secondMaskView.setting(originalAngle: 135, lineWidth: 20, clockwise: true, lineCap: .round, lineGap: -18, innerStartAngle: 135, innerEndAngle: -135)    }
+        secondMaskView.setting(originalAngle: 135, lineWidth: 20, clockwise: true, hiddenMarkerView: false, lineCap: .round, lineGap: -18, markerImage: UIImage(named: "dollar"), innerStartAngle: 135, innerEndAngle: -135)
         
     func resetSetting() {
         

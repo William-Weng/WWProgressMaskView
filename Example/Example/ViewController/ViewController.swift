@@ -50,8 +50,8 @@ private extension ViewController {
     func initSetting() {
         self.title = "WWProgressMaskView"
         // secondMaskView.setting(originalAngle: 225, lineWidth: 20, clockwise: false, lineCap: .round, lineGap: -18, innerStartAngle: 225, innerEndAngle: 495)
-        secondMaskView.setting(originalAngle: 135, lineWidth: 20, clockwise: true, lineCap: .round, lineGap: -18, innerStartAngle: 135, innerEndAngle: -135)    }
-        
+        secondMaskView.setting(originalAngle: 135, lineWidth: 20, clockwise: true, hiddenMarkerView: false, lineCap: .round, lineGap: -18, markerImage: UIImage(named: "dollar"), innerStartAngle: 135, innerEndAngle: -135)
+
     func resetSetting() {
         
         firstPercent = 0

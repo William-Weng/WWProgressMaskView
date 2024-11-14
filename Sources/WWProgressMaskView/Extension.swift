@@ -47,7 +47,7 @@ extension CGFloat {
     }
 }
 
-// MARK: - UIView (class function)
+// MARK: - UIView (function)
 extension UIView {
     
     /// 圓形(弧)路徑
@@ -70,6 +70,13 @@ extension UIView {
     func _fitRadius(lineWidth: CGFloat = 0.0) -> CGFloat {
         let fitDiameter = (frame.height > frame.width) ? frame.width : frame.height
         return (fitDiameter - lineWidth) * 0.5
+    }
+    
+    /// 取得View的旋轉角度 (徑度)
+    /// - Returns: CGFloat
+    func _rotationRadian() -> CGFloat {
+        let transform = self.transform
+        return atan2(transform.b, transform.a)
     }
 }
 

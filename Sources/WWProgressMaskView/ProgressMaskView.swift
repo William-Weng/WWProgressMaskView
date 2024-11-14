@@ -13,15 +13,20 @@ import UIKit
 open class WWProgressMaskView: UIView {
     
     @IBInspectable var clockwise: Bool = false
+    @IBInspectable var hiddenMarkerView: Bool = true
     @IBInspectable var lineWidth: Int = 10
     @IBInspectable var lineGap: CGFloat = 0.0
     @IBInspectable var originalAngle: Int = 0
     @IBInspectable var innerImage: UIImage = UIImage()
     @IBInspectable var outerImage: UIImage = UIImage()
+    @IBInspectable var markerImage: UIImage = UIImage()
     
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var markerView: UIView!
     @IBOutlet weak var innerImageView: UIImageView!
     @IBOutlet weak var outerImageView: UIImageView!
+    @IBOutlet weak var markerImageView: UIImageView!
     
     private let returnZeroAngle: Int = -90
     
@@ -32,14 +37,12 @@ open class WWProgressMaskView: UIView {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        initViewFromXib()
-        initDefaultImage()
+        initSetting()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initViewFromXib()
-        initDefaultImage()
+        initSetting()
     }
     
     override public func draw(_ rect: CGRect) {
@@ -51,6 +54,7 @@ open class WWProgressMaskView: UIView {
     override public func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         initSetting(lineWidth: lineWidth, clockwise: clockwise, lineCap: lineCap)
+        initMarkerImageView()
         contentView.prepareForInterfaceBuilder()
     }
 }
@@ -63,29 +67,35 @@ public extension WWProgressMaskView {
     ///   - originalAngle: 初始角度
     ///   - lineWidth: 線寬
     ///   - clockwise: 順時針 / 逆時針
+    ///   - hiddenMarkerView: 不顯示MarkerView (進度條的指標)
     ///   - innerImage: 內圈軌道的背景圖 (有預設圖片)
     ///   - outerImage: 外圈進度的背景圖 (有預設圖片)
+    ///   - outerImage: 進度條的指標圖 (有預設圖片)
     ///   - lineCap: [線條頭尾的長相](https://developer.apple.com/documentation/quartzcore/cashapelayerlinecap)
     ///   - lineGap: 內環與外環的距離
     ///   - innerStartAngle: 開始的角度
     ///   - innerEndAngle: 結束的角度
-    func setting(originalAngle: Int = 0, lineWidth: Int = 10, clockwise: Bool = false, lineCap: CAShapeLayerLineCap = .butt, lineGap: CGFloat, innerImage: UIImage? = nil, outerImage: UIImage? = nil, innerStartAngle: Int = 0, innerEndAngle: Int = 360) {
+    func setting(originalAngle: Int = 0, lineWidth: Int = 10, clockwise: Bool = false, hiddenMarkerView: Bool = true, lineCap: CAShapeLayerLineCap = .butt, lineGap: CGFloat, innerImage: UIImage? = nil, outerImage: UIImage? = nil, markerImage: UIImage? = nil, innerStartAngle: Int = 0, innerEndAngle: Int = 360) {
         
-        if (lineGap < 0) { contentView.bringSubviewToFront(innerImageView) }
+        if (lineGap < 0) { progressView.bringSubviewToFront(innerImageView) }
         
         let newInnerImage = (lineGap < 0) ? (outerImage ?? self.outerImage) : (innerImage ?? self.innerImage)
         let newOuterImage = (lineGap < 0) ? (innerImage ?? self.innerImage) : (outerImage ?? self.outerImage)
+        let newMarkerImage = markerImage ?? self.markerImage
         
         self.lineWidth = lineWidth
         self.clockwise = clockwise
         self.innerImage = newInnerImage
         self.outerImage = newOuterImage
+        self.markerImage = newMarkerImage
         self.lineCap = lineCap
         self.lineGap = lineGap
         self.innerStartAngle = innerStartAngle + returnZeroAngle
         self.innerEndAngle = innerEndAngle + returnZeroAngle
+        self.hiddenMarkerView = hiddenMarkerView
         
         self.originalAngle = (originalAngle < 0) ? (originalAngle % 360) + innerEndAngle : originalAngle % 360
+        self.rotationMarkerView(anele: fixAngle(angle: 0))
         self.setNeedsDisplay()
     }
     
@@ -104,7 +114,7 @@ public extension WWProgressMaskView {
             outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
         }
     }
-        
+    
     /// 畫進度條
     /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
     func progressCircle(progressUnit: ProgressUnit) {
@@ -117,17 +127,27 @@ public extension WWProgressMaskView {
         
         if (!clockwise && (_endAngle >= returnZeroAngle._CGFloat())) { _endAngle += 360 }
         let fixCircularSectorAngle = circularSectorAngle()
+        let _fixEndAngle = _endAngle - fixCircularSectorAngle._CGFloat()
         
         if (lineGap < 0) {
-            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle - fixCircularSectorAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _fixEndAngle, clockwise: clockwise, lineCap: lineCap)
         } else {
-            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle - fixCircularSectorAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _fixEndAngle, clockwise: clockwise, lineCap: lineCap)
         }
+        
+        rotationMarkerView(anele: _fixEndAngle)
     }
 }
 
 // MARK: - 小工具
 private extension WWProgressMaskView {
+    
+    /// 初始化設定
+    func initSetting() {
+        initViewFromXib()
+        initDefaultImage()
+        initMarkerImageView()
+    }
     
     /// 讀取Nib畫面 => 加到View上面
     func initViewFromXib() {
@@ -146,13 +166,20 @@ private extension WWProgressMaskView {
         
         guard let bundle = Optional.some(Bundle.module),
               let defaultInnerImage = UIImage(named: "inner", in: bundle, with: nil),
-              let defaultOuterImage = UIImage(named: "outer", in: bundle, with: nil)
+              let defaultOuterImage = UIImage(named: "outer", in: bundle, with: nil),
+              let defaultMarkerImage = UIImage(named: "marker", in: bundle, with: nil)
         else {
             return
         }
         
         innerImage = defaultInnerImage
         outerImage = defaultOuterImage
+        markerImage = defaultMarkerImage
+    }
+    
+    /// 設定markerImageView的中央基準點 (錨點)
+    func initMarkerImageView() {
+        markerImageView.layer.anchorPoint = .init(x: 0.25, y: 0.5)
     }
     
     /// 初始化設定
@@ -164,6 +191,7 @@ private extension WWProgressMaskView {
         
         innerImageView.image = innerImage
         outerImageView.image = outerImage
+        markerImageView.image = markerImage
         
         if (lineGap < 0) {
             outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
@@ -172,6 +200,8 @@ private extension WWProgressMaskView {
             innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
             outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerStartAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
         }
+        
+        rotationMarkerView(anele: fixAngle(angle: 0))
     }
     
     /// [設定內圈軌道的Layer層](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/利用-uiview-的-mask-設計特別形狀的圖片-4e22cd7c3fbe)
@@ -199,6 +229,7 @@ private extension WWProgressMaskView {
         
         let path = outerImageView._circlePath(from: startAngle._radian(), to: endAngle._radian(), lineWidth: lineWidth, clockwise: clockwise)
         let layer = CAShapeLayer()._path(path)._lineWidth(lineWidth - abs(lineGap))._fillColor(nil)._strokeColor(.gray)._lineCap(lineCap)
+        
         outerImageView.layer.mask = layer
     }
     
@@ -219,7 +250,6 @@ private extension WWProgressMaskView {
         return percent._percentValue(from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat())
     }
     
-    
     ///  計算扇形的角度要做的修正，因為未滿360度
     /// - Returns: Int
     func circularSectorAngle() -> Int {
@@ -228,5 +258,15 @@ private extension WWProgressMaskView {
         if (differentAngle != 0 && clockwise) { differentAngle -= 180 }
         
         return differentAngle
+    }
+    
+    /// 旋轉進度條的指標
+    /// - Parameter anele: CGFloat
+    func rotationMarkerView(anele: CGFloat) {
+        
+        let currentRotationRadian = markerView._rotationRadian()
+                
+        markerView.transform = markerView.transform.rotated(by: anele._radian() - currentRotationRadian)
+        markerView.isHidden = hiddenMarkerView
     }
 }

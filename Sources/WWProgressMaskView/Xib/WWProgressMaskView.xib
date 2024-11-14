@@ -12,39 +12,75 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="gbA-wH-KCk"/>
                 <outlet property="innerImageView" destination="OrA-Q7-Uuc" id="Mu8-Sq-oba"/>
+                <outlet property="markerImageView" destination="XKF-B7-pVx" id="3Yi-l4-eEx"/>
+                <outlet property="markerView" destination="vPe-Iy-kml" id="1tR-f7-Xah"/>
                 <outlet property="outerImageView" destination="Dd3-6Q-RQI" id="CBe-mr-K84"/>
+                <outlet property="progressView" destination="vbu-Rc-1HM" id="BYX-gK-fuN"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleAspectFit" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
+            <rect key="frame" x="0.0" y="0.0" width="638" height="591"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner.png" translatesAutoresizingMaskIntoConstraints="NO" id="OrA-Q7-Uuc">
-                    <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
-                </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outer.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dd3-6Q-RQI">
-                    <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
-                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbu-Rc-1HM">
+                    <rect key="frame" x="0.0" y="0.0" width="638" height="591"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inner.png" translatesAutoresizingMaskIntoConstraints="NO" id="OrA-Q7-Uuc">
+                            <rect key="frame" x="0.0" y="0.0" width="638" height="591"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outer.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dd3-6Q-RQI">
+                            <rect key="frame" x="0.0" y="0.0" width="638" height="591"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Dd3-6Q-RQI" firstAttribute="top" secondItem="vbu-Rc-1HM" secondAttribute="top" id="9UN-fz-zro"/>
+                        <constraint firstItem="OrA-Q7-Uuc" firstAttribute="top" secondItem="vbu-Rc-1HM" secondAttribute="top" id="EQ2-fp-e8N"/>
+                        <constraint firstAttribute="bottom" secondItem="Dd3-6Q-RQI" secondAttribute="bottom" id="NAy-Eb-ny0"/>
+                        <constraint firstItem="OrA-Q7-Uuc" firstAttribute="leading" secondItem="vbu-Rc-1HM" secondAttribute="leading" id="RIu-2K-6Zz"/>
+                        <constraint firstAttribute="trailing" secondItem="OrA-Q7-Uuc" secondAttribute="trailing" id="ann-SN-eg5"/>
+                        <constraint firstAttribute="bottom" secondItem="OrA-Q7-Uuc" secondAttribute="bottom" id="boh-G8-npD"/>
+                        <constraint firstItem="Dd3-6Q-RQI" firstAttribute="leading" secondItem="vbu-Rc-1HM" secondAttribute="leading" id="eqe-Ym-XIt"/>
+                        <constraint firstAttribute="trailing" secondItem="Dd3-6Q-RQI" secondAttribute="trailing" id="nHL-Y2-cKQ"/>
+                    </constraints>
+                </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPe-Iy-kml">
+                    <rect key="frame" x="0.0" y="293" width="638" height="5"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marker.png" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-B7-pVx">
+                            <rect key="frame" x="537.66666666666663" y="-47.666666666666657" width="100.33333333333337" height="100.33333333333333"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="XKF-B7-pVx" secondAttribute="height" multiplier="1:1" id="8Yx-dX-Q50"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="XKF-B7-pVx" firstAttribute="centerY" secondItem="vPe-Iy-kml" secondAttribute="centerY" id="260-Tf-m0R"/>
+                        <constraint firstAttribute="trailing" secondItem="XKF-B7-pVx" secondAttribute="trailing" id="9Kz-cH-Khp"/>
+                        <constraint firstAttribute="height" constant="5" id="get-Ih-774"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Dd3-6Q-RQI" secondAttribute="bottom" id="Caq-gR-9ih"/>
-                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="width" secondItem="Dd3-6Q-RQI" secondAttribute="width" id="Psy-jm-e5U"/>
-                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="TMr-uj-ncn"/>
-                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="X8l-lb-iGQ"/>
-                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bxZ-Gr-RrA"/>
-                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="mxk-ZD-edV"/>
-                <constraint firstItem="Dd3-6Q-RQI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sF1-ZH-ZE3"/>
-                <constraint firstItem="OrA-Q7-Uuc" firstAttribute="height" secondItem="Dd3-6Q-RQI" secondAttribute="height" id="yzc-pU-Skl"/>
+                <constraint firstItem="vPe-Iy-kml" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OmM-aa-rQx"/>
+                <constraint firstItem="vbu-Rc-1HM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="P2h-Tj-VpV"/>
+                <constraint firstItem="vbu-Rc-1HM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ua8-Vg-b7B"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="vPe-Iy-kml" secondAttribute="trailing" id="Ycm-H1-9Hk"/>
+                <constraint firstItem="vPe-Iy-kml" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bMV-yF-tgC"/>
+                <constraint firstItem="vbu-Rc-1HM" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="nLm-DU-9HC"/>
+                <constraint firstAttribute="bottom" secondItem="vbu-Rc-1HM" secondAttribute="bottom" id="yoD-QH-ZlA"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="306.87022900763355" y="-45.070422535211272"/>
+            <point key="canvasLocation" x="403.05343511450383" y="-17.253521126760564"/>
         </view>
     </objects>
     <resources>
         <image name="inner.png" width="1000" height="1000"/>
+        <image name="marker.png" width="100.17391204833984" height="100.17391204833984"/>
         <image name="outer.png" width="1000" height="1000"/>
     </resources>
 </document>
