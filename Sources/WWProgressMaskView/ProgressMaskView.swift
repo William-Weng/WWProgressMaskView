@@ -50,6 +50,7 @@ open class WWProgressMaskView: UIView {
     /// [IB Designables: Failed to render and update auto layout status](https://stackoverflow.com/questions/46723683/ib-designables-failed-to-render-and-update-auto-layout-status)
     override public func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        initSetting(lineWidth: lineWidth, clockwise: clockwise, lineCap: lineCap)
         contentView.prepareForInterfaceBuilder()
     }
 }
@@ -104,7 +105,7 @@ public extension WWProgressMaskView {
         }
     }
         
-    /// 畫進度條 (扇形的角度要做修正，因為未滿360度)
+    /// 畫進度條
     /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
     func progressCircle(progressUnit: ProgressUnit) {
         
@@ -115,8 +116,7 @@ public extension WWProgressMaskView {
         var _endAngle = fixAngle(angle: endAngle)
         
         if (!clockwise && (_endAngle >= returnZeroAngle._CGFloat())) { _endAngle += 360 }
-        
-        let fixCircularSectorAngle = (innerEndAngle - innerStartAngle - 360) % 360 / 2
+        let fixCircularSectorAngle = circularSectorAngle()
         
         if (lineGap < 0) {
             innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle - fixCircularSectorAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
@@ -212,9 +212,21 @@ private extension WWProgressMaskView {
     func parsePercentValueAngle(progressUnit: ProgressUnit) -> CGFloat {
         
         var percent = progressUnit.decimal()
+        
         if (percent < 0.0) { percent = 0.0 }
         if (percent > 1.0) { percent = 1.0 }
         
         return percent._percentValue(from: innerStartAngle._CGFloat(), to: innerEndAngle._CGFloat())
+    }
+    
+    
+    ///  計算扇形的角度要做的修正，因為未滿360度
+    /// - Returns: Int
+    func circularSectorAngle() -> Int {
+
+        var differentAngle = (innerEndAngle - innerStartAngle - 360) % 360 / 2
+        if (differentAngle != 0 && clockwise) { differentAngle -= 180 }
+        
+        return differentAngle
     }
 }

@@ -10,10 +10,13 @@ import UIKit
 import WWPrint
 import WWProgressMaskView
 
+@IBDesignable
+final class MyProgressMaskView: WWProgressMaskView {}
+
 final class ViewController: UIViewController {
 
-    @IBOutlet weak var firstMaskView: WWProgressMaskView!
-    @IBOutlet weak var secondMaskView: WWProgressMaskView!
+    @IBOutlet weak var firstMaskView: MyProgressMaskView!
+    @IBOutlet weak var secondMaskView: MyProgressMaskView!
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     
@@ -46,8 +49,8 @@ private extension ViewController {
     
     func initSetting() {
         self.title = "WWProgressMaskView"
-        secondMaskView.setting(originalAngle: 225, lineWidth: 20, clockwise: false, lineCap: .round, lineGap: -18, innerStartAngle: 225, innerEndAngle: 495)
-    }
+        // secondMaskView.setting(originalAngle: 225, lineWidth: 20, clockwise: false, lineCap: .round, lineGap: -18, innerStartAngle: 225, innerEndAngle: 495)
+        secondMaskView.setting(originalAngle: 135, lineWidth: 20, clockwise: true, lineCap: .round, lineGap: -18, innerStartAngle: 135, innerEndAngle: -135)    }
         
     func resetSetting() {
         
