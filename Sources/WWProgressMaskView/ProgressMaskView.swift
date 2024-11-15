@@ -4,7 +4,6 @@
 //
 //  Created by William.Weng on 2022/12/13.
 //
-/// [漸層圖片](https://webkul.github.io/coolhue/)
 
 import UIKit
 
@@ -27,6 +26,8 @@ open class WWProgressMaskView: UIView {
     @IBOutlet weak var innerImageView: UIImageView!
     @IBOutlet weak var outerImageView: UIImageView!
     @IBOutlet weak var markerImageView: UIImageView!
+    
+    public weak var delegate: WWProgressMaskViewDelegate?
     
     private let returnZeroAngle: Int = -90
     
@@ -56,6 +57,10 @@ open class WWProgressMaskView: UIView {
         initSetting(lineWidth: lineWidth, clockwise: clockwise, lineCap: lineCap)
         initMarkerImageView()
         contentView.prepareForInterfaceBuilder()
+    }
+    
+    deinit {
+        delegate = nil
     }
 }
 
@@ -113,6 +118,9 @@ public extension WWProgressMaskView {
         } else {
             outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
         }
+        
+        rotationMarkerView(anele: _endAngle)
+        delegate?.progressMaskViewAngle(self, from: _startAngle, to: _endAngle)
     }
     
     /// 畫進度條
@@ -126,16 +134,18 @@ public extension WWProgressMaskView {
         var _endAngle = fixAngle(angle: endAngle)
         
         if (!clockwise && (_endAngle >= returnZeroAngle._CGFloat())) { _endAngle += 360 }
+        
         let fixCircularSectorAngle = circularSectorAngle()
-        let _fixEndAngle = _endAngle - fixCircularSectorAngle._CGFloat()
+        _endAngle = _endAngle - fixCircularSectorAngle._CGFloat()
         
         if (lineGap < 0) {
-            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _fixEndAngle, clockwise: clockwise, lineCap: lineCap)
+            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
         } else {
-            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _fixEndAngle, clockwise: clockwise, lineCap: lineCap)
+            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
         }
         
-        rotationMarkerView(anele: _fixEndAngle)
+        rotationMarkerView(anele: _endAngle)
+        delegate?.progressMaskViewAngle(self, from: _startAngle, to: _endAngle)
     }
 }
 
