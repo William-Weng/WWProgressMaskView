@@ -11,18 +11,18 @@
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
 dependencies: [
-    .package(url: "https://github.com/William-Weng/WWProgressMaskView.git", .upToNextMajor(from: "1.3.3"))
+    .package(url: "https://github.com/William-Weng/WWProgressMaskView.git", .upToNextMajor(from: "1.4.0"))
 ]
 ```
 
 ![](./IBDesignable.png)
 
-### Function - 可用函式
+### [Function - 可用函式](https://ezgif.com/video-to-webp)
 |函式|功能|
 |-|-|
 |setting(originalAngle:lineWidth:clockwise:hiddenMarkerView:lineCap:lineGap:innerImage:outerImage:markerImage:innerStartAngle:innerEndAngle:)|設定一些初始值 => 會重畫|
-|progressCircle(from:to:)|畫進度條 (以角度為準)|
-|progressCircle(progressUnit:)|畫進度條|
+|progressCircle(type:from:to:)|畫進度條 (以角度為準)|
+|progressCircle(type:progressUnit:)|畫進度條|
 
 ### WWProgressMaskViewDelegate
 |函式|功能|
@@ -61,7 +61,7 @@ final class ViewController: UIViewController {
     
     @IBAction func secondTestAction(_ sender: UIBarButtonItem) {
         secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
-        secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
+        secondMaskView.progressCircle(type: .once(0.25), progressUnit: .basisPoint(secondBasisPoint))
         secondBasisPoint += 1250
     }
     
@@ -95,7 +95,7 @@ private extension ViewController {
         firstLabel.text = "\(firstPercent) %"
 
         firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
-        secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
+        secondMaskView.progressCircle(type: .once(0.25), progressUnit: .basisPoint(secondBasisPoint))
     }
 }
 ```

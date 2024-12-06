@@ -129,3 +129,35 @@ extension CGPath {
         return path
     }
 }
+
+// MARK: - CAAnimation (static function)
+extension CAAnimation {
+    
+    /// [Layer動畫產生器 (CABasicAnimation)](https://jjeremy-xue.medium.com/swift-說說-cabasicanimation-9be31ee3eae0)
+    /// - Parameters:
+    ///   - keyPath: [要產生的動畫key值](https://blog.csdn.net/iosevanhuang/article/details/14488239)
+    ///   - delegate: [CAAnimationDelegate?](https://juejin.cn/post/6936070813648945165)
+    ///   - fromValue: 開始的值
+    ///   - toValue: 結束的值
+    ///   - duration: 動畫時間
+    ///   - repeatCount: 播放次數
+    ///   - fillMode: [CAMediaTimingFillMode](https://juejin.cn/post/6991371790245183496)
+    ///   - timingFunction: CAMediaTimingFunction?
+    ///   - isRemovedOnCompletion: Bool
+    /// - Returns: WWProgressMaskView.CAAnimationInformation
+    static func _basicAnimation(keyPath: WWProgressMaskView.TransitionAnimationKeyPath, delegate: CAAnimationDelegate?, fromValue: Any?, toValue: Any?, duration: CFTimeInterval, repeatCount: Float = 1.0, fillMode: CAMediaTimingFillMode = .forwards, timingFunction: CAMediaTimingFunction?, isRemovedOnCompletion: Bool = false) -> WWProgressMaskView.BasicAnimationInformation {
+        
+        let animation = CABasicAnimation(keyPath: keyPath.rawValue)
+        
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = duration
+        animation.repeatCount = repeatCount
+        animation.fillMode = fillMode
+        animation.isRemovedOnCompletion = isRemovedOnCompletion
+        animation.delegate = delegate
+        animation.timingFunction = timingFunction
+        
+        return (animation, keyPath)
+    }
+}

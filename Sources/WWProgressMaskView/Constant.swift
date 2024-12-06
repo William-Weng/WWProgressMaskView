@@ -11,6 +11,8 @@ import UIKit
 // MARK: - 常數
 public extension WWProgressMaskView {
     
+    typealias BasicAnimationInformation = (animation: CABasicAnimation, keyPath: TransitionAnimationKeyPath)   // Basic動畫資訊
+    
     /// 進度單位 => 1% / 1‰ / 1‱ (整數比較不會有誤差值)
     public enum ProgressUnit {
         
@@ -27,5 +29,18 @@ public extension WWProgressMaskView {
             case .basisPoint(let number): return number._CGFloat() * 0.0001
             }
         }
+    }
+    
+    /// 畫線類型
+    public enum DrawType {
+        case accumulate                 // 累加型 (無動畫)
+        case once(_ duration: CGFloat)  // 單次型 (有動畫)
+    }
+    
+    /// [動畫路徑 (KeyPath)](https://stackoverflow.com/questions/44230796/what-is-the-full-keypath-list-for-cabasicanimation)
+    enum TransitionAnimationKeyPath: String {
+        case strokeEnd = "strokeEnd"
+        case position = "position"
+        case rotation = "transform.rotation"
     }
 }

@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
     
     @IBAction func secondTestAction(_ sender: UIBarButtonItem) {
         secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
-        secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
+        secondMaskView.progressCircle(type: .once(0.25), progressUnit: .basisPoint(secondBasisPoint))
         secondBasisPoint += 1250
     }
     
@@ -68,8 +68,8 @@ private extension ViewController {
         
         secondLabel.text = "\(CGFloat(secondBasisPoint) / 100.0) %"
         firstLabel.text = "\(firstPercent) %"
-
+        
         firstMaskView.progressCircle(progressUnit: .percent(firstPercent))
-        secondMaskView.progressCircle(progressUnit: .basisPoint(secondBasisPoint))
+        secondMaskView.progressCircle(type: .once(0.25), progressUnit: .basisPoint(secondBasisPoint))
     }
 }

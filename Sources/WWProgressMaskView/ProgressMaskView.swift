@@ -100,32 +100,28 @@ public extension WWProgressMaskView {
         self.hiddenMarkerView = hiddenMarkerView
         
         self.originalAngle = (originalAngle < 0) ? (originalAngle % 360) + innerEndAngle : originalAngle % 360
-        self.rotationMarkerView(anele: fixAngle(angle: 0))
+        self.rotationMarkerView(type: .accumulate, angle: fixAngle(angle: 0))
         self.setNeedsDisplay()
     }
     
     /// 畫進度條 (以角度為準)
     /// - Parameters:
+    ///   - type: 畫線的類型
     ///   - startAngle: 啟始角度 (-180 ~ 180)
     ///   - endAngle: 結束角度 (180 ~ -180)
-    func progressCircle(from startAngle: CGFloat, to endAngle: CGFloat) {
+    func progressCircle(type: WWProgressMaskView.DrawType = .accumulate, from startAngle: CGFloat, to endAngle: CGFloat) {
         
         let _startAngle = fixAngle(angle: startAngle)
         let _endAngle = fixAngle(angle: endAngle)
         
-        if (lineGap < 0) {
-            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
-        } else {
-            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
-        }
-        
-        rotationMarkerView(anele: _endAngle)
-        delegate?.progressMaskViewAngle(self, from: _startAngle, to: _endAngle)
+        drawProgressCircle(type: type, from: _startAngle, to: _endAngle)
     }
     
     /// 畫進度條
-    /// - Parameter progressUnit: 百分之一 / 千分之一 / 萬分之一
-    func progressCircle(progressUnit: ProgressUnit) {
+    /// - Parameters:
+    ///   - type: 畫線的類型
+    ///   - progressUnit: 百分之一 / 千分之一 / 萬分之一
+    func progressCircle(type: WWProgressMaskView.DrawType = .accumulate, progressUnit: ProgressUnit) {
         
         let percentValueAngle = parsePercentValueAngle(progressUnit: progressUnit)
         let endAngle = (!clockwise) ? percentValueAngle : -(percentValueAngle + 360)
@@ -138,14 +134,7 @@ public extension WWProgressMaskView {
         let fixCircularSectorAngle = circularSectorAngle()
         _endAngle = _endAngle - fixCircularSectorAngle._CGFloat()
         
-        if (lineGap < 0) {
-            innerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
-        } else {
-            outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: _startAngle, to: _endAngle, clockwise: clockwise, lineCap: lineCap)
-        }
-        
-        rotationMarkerView(anele: _endAngle)
-        delegate?.progressMaskViewAngle(self, from: _startAngle, to: _endAngle)
+        drawProgressCircle(type: type, from: _startAngle, to: _endAngle)
     }
 }
 
@@ -211,34 +200,64 @@ private extension WWProgressMaskView {
             outerCircleSetting(lineWidth: lineWidth._CGFloat(), from: innerStartAngle._CGFloat(), to: innerStartAngle._CGFloat(), clockwise: clockwise, lineCap: lineCap)
         }
         
-        rotationMarkerView(anele: fixAngle(angle: 0))
+        rotationMarkerView(type: .accumulate, angle: fixAngle(angle: 0))
+    }
+    
+    /// 畫進度條
+    /// - Parameters:
+    ///   - type: 畫線的類型
+    ///   - startAngle: 開始的角度
+    ///   - endAngle: 結束的角度
+    func drawProgressCircle(type: WWProgressMaskView.DrawType = .accumulate, from startAngle: CGFloat, to endAngle: CGFloat) {
+        
+        if (lineGap < 0) {
+            innerCircleSetting(type: type, lineWidth: lineWidth._CGFloat(), from: startAngle, to: endAngle, clockwise: clockwise, lineCap: lineCap)
+        } else {
+            outerCircleSetting(type: type, lineWidth: lineWidth._CGFloat(), from: startAngle, to: endAngle, clockwise: clockwise, lineCap: lineCap)
+        }
+        
+        rotationMarkerView(type: type, angle: endAngle)
+        delegate?.progressMaskViewAngle(self, from: startAngle, to: endAngle)
     }
     
     /// [設定內圈軌道的Layer層](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/利用-uiview-的-mask-設計特別形狀的圖片-4e22cd7c3fbe)
     /// - Parameters:
+    ///   - type: 畫線的類型
     ///   - lineWidth: 線寬
     ///   - startAngle: 啟始角度 (-180 ~ 180)
     ///   - endAngle: 結束角度 (-180 ~ 180)
     ///   - clockwise: 順時針 / 逆時針
     ///   - lineCap: 線條頭尾的長相
-    func innerCircleSetting(lineWidth: CGFloat, from startAngle: CGFloat, to endAngle: CGFloat, clockwise: Bool, lineCap: CAShapeLayerLineCap = .butt) {
+    func innerCircleSetting(type: WWProgressMaskView.DrawType = .accumulate, lineWidth: CGFloat, from startAngle: CGFloat, to endAngle: CGFloat, clockwise: Bool, lineCap: CAShapeLayerLineCap) {
         
         let path = innerImageView._circlePath(from: startAngle._radian(), to: endAngle._radian(), lineWidth: lineWidth, clockwise: clockwise)
         let layer = CAShapeLayer()._path(path)._lineWidth(lineWidth)._fillColor(nil)._strokeColor(.gray)._lineCap(lineCap)
+        
+        switch type {
+        case .once(let duration): layer.add(circleStrokeEndAnimation(duration: duration), forKey: "innerCircleStrokeEndAnimation")
+        case .accumulate: break
+        }
+        
         innerImageView.layer.mask = layer
     }
     
     /// [設定外圈進度的Layer層](https://medium.com/彼得潘的-swift-ios-app-開發教室/作業4-利用-uibezierpath-實現圓環進度條-甜甜圈圖表-圓餅圖-5de1cd6da16d)
     /// - Parameters:
+    ///   - type: 畫線的類型
     ///   - lineWidth: 線寬
     ///   - startAngle: 啟始角度 (-180 ~ 180)
     ///   - endAngle: 結束角度 (-180 ~ 180)
     ///   - clockwise: 順時針 / 逆時針
     ///   - lineCap: 線條頭尾的長相
-    func outerCircleSetting(lineWidth: CGFloat, from startAngle: CGFloat, to endAngle: CGFloat, clockwise: Bool, lineCap: CAShapeLayerLineCap = .butt) {
+    func outerCircleSetting(type: WWProgressMaskView.DrawType = .accumulate, lineWidth: CGFloat, from startAngle: CGFloat, to endAngle: CGFloat, clockwise: Bool, lineCap: CAShapeLayerLineCap) {
         
         let path = outerImageView._circlePath(from: startAngle._radian(), to: endAngle._radian(), lineWidth: lineWidth, clockwise: clockwise)
         let layer = CAShapeLayer()._path(path)._lineWidth(lineWidth - abs(lineGap))._fillColor(nil)._strokeColor(.gray)._lineCap(lineCap)
+        
+        switch type {
+        case .once(let duration): layer.add(circleStrokeEndAnimation(duration: duration), forKey: "outerCircleStrokeEndAnimation")
+        case .accumulate: break
+        }
         
         outerImageView.layer.mask = layer
     }
@@ -271,12 +290,40 @@ private extension WWProgressMaskView {
     }
     
     /// 旋轉進度條的指標
-    /// - Parameter anele: CGFloat
-    func rotationMarkerView(anele: CGFloat) {
+    /// - Parameter angle: CGFloat
+    func rotationMarkerView(type: WWProgressMaskView.DrawType, angle: CGFloat) {
         
         let currentRotationRadian = markerView._rotationRadian()
-                
-        markerView.transform = markerView.transform.rotated(by: anele._radian() - currentRotationRadian)
+
+        print("innerStartAngle = \(innerStartAngle), innerEndAngle = \(innerEndAngle), angle = \(angle), currentRotationRadian = \(currentRotationRadian._angle())")
+        
+        switch type {
+        case .once(let duration): markerView.layer.add(rotationMarkerViewAnimation(form: CGFloat(innerStartAngle), to: angle, duration: duration), forKey: "rotationAnimation")
+        case .accumulate: break
+        }
+        
+        markerView.transform = markerView.transform.rotated(by: angle._radian() - currentRotationRadian)
         markerView.isHidden = hiddenMarkerView
+    }
+    
+    /// 畫圓形弧線的動畫
+    /// - Parameter duration: 動畫時間
+    /// - Returns: CAAnimation
+    func circleStrokeEndAnimation(duration: CGFloat) -> CAAnimation {
+        
+        let info = CAAnimation._basicAnimation(keyPath: .strokeEnd, delegate: nil, fromValue: 0.0, toValue: 1.0, duration: duration, timingFunction: CAMediaTimingFunction(name: .linear))
+        return info.animation
+    }
+    
+    /// 旋轉進度條的動畫
+    /// - Parameters:
+    ///   - startAngle: 開始的角度
+    ///   - endAngle: 結束的角度
+    ///   - duration: 動畫時間
+    /// - Returns: CAAnimation
+    func rotationMarkerViewAnimation(form startAngle: CGFloat, to endAngle: CGFloat, duration: CGFloat) -> CAAnimation {
+        
+        let info = CAAnimation._basicAnimation(keyPath: .rotation, delegate: nil, fromValue: startAngle._radian(), toValue: endAngle._radian(), duration: duration, timingFunction: CAMediaTimingFunction(name: .linear))
+        return info.animation
     }
 }

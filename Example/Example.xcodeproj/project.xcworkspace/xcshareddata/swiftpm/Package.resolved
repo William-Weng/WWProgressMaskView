@@ -1,4 +1,5 @@
 {
+  "originHash" : "1e7e054e9c908a82855c08928ade049ffd25b4ecdecf2761608a5639a3d056ac",
   "pins" : [
     {
       "identity" : "wwprint",
@@ -19,5 +20,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
