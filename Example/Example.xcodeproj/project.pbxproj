@@ -430,7 +430,7 @@
 			repositoryURL = "https://github.com/William-Weng/WWProgressMaskView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.3;
+				minimumVersion = 1.4.0;
 			};
 		};
 		814B683F2BA2C616009EFC60 /* XCRemoteSwiftPackageReference "WWPrint" */ = {
