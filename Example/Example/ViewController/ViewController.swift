@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import WWPrint
 import WWProgressMaskView
 
 @IBDesignable
@@ -45,10 +44,10 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: WWProgressMaskViewDelegate {
+extension ViewController: WWProgressMaskView.Delegate {
     
     func progressMaskViewAngle(_ progressMaskView: WWProgressMaskView, from startAngle: CGFloat, to endAngle: CGFloat) {
-        wwPrint("\(progressMaskView) => from \(startAngle) to \(endAngle)")
+        print("\(progressMaskView) => from \(startAngle) to \(endAngle)")
     }
 }
 

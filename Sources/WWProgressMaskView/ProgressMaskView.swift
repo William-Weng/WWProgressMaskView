@@ -8,7 +8,6 @@
 import UIKit
 
 // MARK: - 動態的進度條
-@IBDesignable
 open class WWProgressMaskView: UIView {
     
     @IBInspectable var clockwise: Bool = false
@@ -27,7 +26,7 @@ open class WWProgressMaskView: UIView {
     @IBOutlet weak var outerImageView: UIImageView!
     @IBOutlet weak var markerImageView: UIImageView!
     
-    public weak var delegate: WWProgressMaskViewDelegate?
+    public weak var delegate: WWProgressMaskView.Delegate?
     
     private let returnZeroAngle: Int = -90
     
