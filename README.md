@@ -6,7 +6,7 @@
 - The progress ring function of the custom background image uses the principle of picture shielding to make the color of the progress ring more diverse...
 - 自訂背景圖的進度環功能，利用圖片遮罩的原理，讓進度環的色彩更多樣化…
 
-![](./Example.webp)
+https://github.com/user-attachments/assets/4935fc82-be9d-4186-941a-e3ceb9d0314a
 
 ### [Installation with Swift Package Manager](https://medium.com/彼得潘的-swift-ios-app-開發問題解答集/使用-spm-安裝第三方套件-xcode-11-新功能-2c4ffcf85b4b)
 ```bash
@@ -24,7 +24,7 @@ dependencies: [
 |progressCircle(type:from:to:)|畫進度條 (以角度為準)|
 |progressCircle(type:progressUnit:)|畫進度條|
 
-### WWProgressMaskViewDelegate
+### WWProgressMaskView.Delegate
 |函式|功能|
 |-|-|
 |progressMaskViewAngle(_:from:to:)|進度條的移動角度|
@@ -70,7 +70,7 @@ final class ViewController: UIViewController {
     }
 }
 
-extension ViewController: WWProgressMaskViewDelegate {
+extension ViewController: WWProgressMaskView.Delegate {
     
     func progressMaskViewAngle(_ progressMaskView: WWProgressMaskView, from startAngle: CGFloat, to endAngle: CGFloat) {
         wwPrint("\(progressMaskView) => from \(startAngle) to \(endAngle)")

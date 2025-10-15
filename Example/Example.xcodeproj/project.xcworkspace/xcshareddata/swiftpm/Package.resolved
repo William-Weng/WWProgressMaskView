@@ -1,0 +1,15 @@
+{
+  "originHash" : "0b3d02aa24e907f6a671e2be8bdb41a43391c3ecc671cac5d6a5cf7820a3c08f",
+  "pins" : [
+    {
+      "identity" : "wwprogressmaskview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/William-Weng/WWProgressMaskView",
+      "state" : {
+        "revision" : "e06a65bc48159b33874cc4f940673cb00f7dc5d9",
+        "version" : "1.4.1"
+      }
+    }
+  ],
+  "version" : 3
+}

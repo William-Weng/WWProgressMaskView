@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		64D966CC2D0329E300BD6609 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 64D966CB2D0329E300BD6609 /* WWProgressMaskView */; };
 		64D966CF2D03495400BD6609 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 64D966CE2D03495400BD6609 /* WWProgressMaskView */; };
 		81256A9A2E9F36D600C9002A /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81256A992E9F36D600C9002A /* WWProgressMaskView */; };
+		81256A9D2E9F392000C9002A /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 81256A9C2E9F392000C9002A /* WWProgressMaskView */; };
 		813EF6522C2006BB00463E19 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 813EF6512C2006BB00463E19 /* WWProgressMaskView */; };
 		814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683A2BA2C57D009EFC60 /* WWProgressMaskView */; };
 		814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */ = {isa = PBXBuildFile; productRef = 814B683D2BA2C5AB009EFC60 /* WWProgressMaskView */; };
@@ -45,6 +46,7 @@
 				64D966CC2D0329E300BD6609 /* WWProgressMaskView in Frameworks */,
 				814B683B2BA2C57D009EFC60 /* WWProgressMaskView in Frameworks */,
 				814B683E2BA2C5AB009EFC60 /* WWProgressMaskView in Frameworks */,
+				81256A9D2E9F392000C9002A /* WWProgressMaskView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +147,7 @@
 				64D966CB2D0329E300BD6609 /* WWProgressMaskView */,
 				64D966CE2D03495400BD6609 /* WWProgressMaskView */,
 				81256A992E9F36D600C9002A /* WWProgressMaskView */,
+				81256A9C2E9F392000C9002A /* WWProgressMaskView */,
 			);
 			productName = Example;
 			productReference = 3DBCD87026F198EF00522E3B /* Example.app */;
@@ -175,7 +178,7 @@
 			);
 			mainGroup = 3DBCD86726F198EF00522E3B;
 			packageReferences = (
-				81256A982E9F36D600C9002A /* XCLocalSwiftPackageReference "../../WWProgressMaskView" */,
+				81256A9B2E9F392000C9002A /* XCRemoteSwiftPackageReference "WWProgressMaskView" */,
 			);
 			productRefGroup = 3DBCD87126F198EF00522E3B /* Products */;
 			projectDirPath = "";
@@ -420,12 +423,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		81256A982E9F36D600C9002A /* XCLocalSwiftPackageReference "../../WWProgressMaskView" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../WWProgressMaskView;
+/* Begin XCRemoteSwiftPackageReference section */
+		81256A9B2E9F392000C9002A /* XCRemoteSwiftPackageReference "WWProgressMaskView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/William-Weng/WWProgressMaskView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		64D966CB2D0329E300BD6609 /* WWProgressMaskView */ = {
@@ -438,6 +445,11 @@
 		};
 		81256A992E9F36D600C9002A /* WWProgressMaskView */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = WWProgressMaskView;
+		};
+		81256A9C2E9F392000C9002A /* WWProgressMaskView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81256A9B2E9F392000C9002A /* XCRemoteSwiftPackageReference "WWProgressMaskView" */;
 			productName = WWProgressMaskView;
 		};
 		813EF6512C2006BB00463E19 /* WWProgressMaskView */ = {
